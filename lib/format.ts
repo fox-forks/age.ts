@@ -1,4 +1,6 @@
-import { base64_variants, from_base64, from_string, to_base64, to_string } from "libsodium-wrappers-sumo"
+import sumo from "libsodium-wrappers-sumo"
+
+const { base64_variants, from_base64, from_string, to_base64, to_string } = sumo
 
 export const decodeBase64 = (s: string) => from_base64(s, base64_variants.ORIGINAL_NO_PADDING)
 export const encodeBase64 = (s: Uint8Array) => to_base64(s, base64_variants.ORIGINAL_NO_PADDING)

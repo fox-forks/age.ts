@@ -1,5 +1,7 @@
 import * as sodium from "libsodium-wrappers-sumo"
-import { from_string } from "libsodium-wrappers-sumo"
+import sumo from "libsodium-wrappers-sumo"
+
+const { from_string } = sumo
 
 // @types/libsodium-wrappers-sumo is missing these definitions.
 declare module "libsodium-wrappers-sumo" {

@@ -1,10 +1,12 @@
 import * as assert from 'assert'
 import age from '../lib/index.js'
 import { readFileSync, readdirSync } from 'fs'
-import { crypto_hash_sha256, from_hex, to_hex } from 'libsodium-wrappers-sumo'
+import sumo from 'libsodium-wrappers-sumo'
 import { encodeHeader, encodeHeaderNoMAC, parseHeader } from '../lib/format.js'
 import { decryptSTREAM, encryptSTREAM } from '../lib/stream.js'
 import { HKDF } from '../lib/hkdf.js'
+
+const { crypto_hash_sha256, from_hex, to_hex } = sumo
 
 describe('CCTV testkit', function () {
     interface Vector {
@@ -13,8 +15,8 @@ describe('CCTV testkit', function () {
         body: Uint8Array,
     }
     const vectors: Vector[] = []
-    for (const name of readdirSync('testkit')) {
-        const contents = readFileSync('testkit/' + name)
+    for (const name of readdirSync('tests/testkit')) {
+        const contents = readFileSync('tests/testkit/' + name)
         const sepIdx = contents.indexOf("\n\n")
         const header = contents.subarray(0, sepIdx).toString()
         const body = contents.subarray(sepIdx + 2)
